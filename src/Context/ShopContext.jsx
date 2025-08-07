@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { createContext } from "react";
 import { useState } from "react";
+import all_product from "../Components/Assets/all_product";
 
 export const ShopContext = createContext(null);
 const getDefaultCart = () => {
@@ -21,7 +22,22 @@ export const ShopContextProvider = (props) => {
         .then((response)=> response.json())
         .then((data)=>{
             console.log("從 API 獲取的產品數據:", data);
-            setAllProduct(data);
+            
+            // 合併後端數據和本地圖片
+            const mergedProducts = data.map(apiProduct => {
+                const localProduct = all_product.find(local => local.id === apiProduct.id);
+                return {
+                    ...apiProduct,
+                    image: localProduct ? localProduct.image : apiProduct.image
+                };
+            });
+            
+            console.log("合併後的產品數據:", mergedProducts);
+            setAllProduct(mergedProducts);
+        })
+        .catch((error) => {
+            console.error("API 獲取失敗，使用本地數據:", error);
+            setAllProduct(all_product);
         })
 
         if(localStorage.getItem("auth-token")){

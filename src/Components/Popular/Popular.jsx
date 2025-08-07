@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './Popular.css'
 import { Item } from '../Item/Item'
 import { useState } from 'react'
+import all_product from '../Assets/all_product'
 
 export const Popular = () => {
 
@@ -10,7 +11,21 @@ export const Popular = () => {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL || "http://localhost:4000"}/popularinwomen`)
       .then((response) => response.json())
-      .then((data) => setPopularProducts(data))
+      .then((data) => {
+        // 合併後端數據和本地圖片
+        const mergedData = data.map(apiProduct => {
+          const localProduct = all_product.find(local => local.id === apiProduct.id);
+          return {
+            ...apiProduct,
+            image: localProduct ? localProduct.image : apiProduct.image
+          };
+        });
+        setPopularProducts(mergedData);
+      })
+      .catch((error) => {
+        console.error("API 獲取失敗，使用本地數據:", error);
+        setPopularProducts(all_product.filter(item => item.category === "women").slice(0, 4));
+      })
   }, []);
 
   return (
