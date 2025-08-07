@@ -1,70 +1,171 @@
-# Getting Started with Create React App
+# 電商網站前端
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+這是電商網站的前端應用，使用 React 構建的現代化電商購物平台。
 
-## Available Scripts
+## 技術棧
 
-In the project directory, you can run:
+- **React** - 前端框架
+- **React Router** - 路由管理
+- **Context API** - 狀態管理
+- **CSS3** - 樣式設計
+- **Fetch API** - HTTP 請求處理
 
-### `npm start`
+## 主要功能
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🏪 **商品展示**
+- 商品列表展示
+- 商品詳情頁面
+- 分類瀏覽（男裝、女裝、童裝）
+- 新品推薦
+- 熱門商品展示
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🛒 **購物功能**
+- 購物車管理
+- 商品數量調整
+- 購物車結算
+- 商品收藏
 
-### `npm test`
+### 👤 **用戶功能**
+- 用戶註冊
+- 用戶登入
+- JWT Token 認證
+- 個人資料管理
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🎨 **UI/UX 特色**
+- 響應式設計
+- 現代化界面
+- 流暢的用戶體驗
+- 商品圖片輪播
+- 平滑滾動效果
 
-### `npm run build`
+## 頁面結構
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src/
+├── Components/          # 可重用組件
+│   ├── Navbar/         # 導航欄
+│   ├── Hero/           # 首頁橫幅
+│   ├── Popular/        # 熱門商品
+│   ├── NewCollections/ # 新品推薦
+│   ├── ProductDisplay/ # 商品展示
+│   ├── CartItems/      # 購物車項目
+│   ├── Footer/         # 頁腳
+│   └── ...
+├── Pages/              # 頁面組件
+│   ├── Shop.jsx        # 首頁
+│   ├── ShopCategory.jsx # 分類頁面
+│   ├── Product.jsx     # 商品詳情
+│   ├── Cart.jsx        # 購物車
+│   └── LoginSignup.jsx # 登入註冊
+├── Context/            # 狀態管理
+│   └── ShopContext.jsx # 全局狀態
+└── Components/Assets/  # 靜態資源
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 環境變數
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+創建 `.env` 文件並設置：
 
-### `npm run eject`
+```env
+REACT_APP_API_URL=your_backend_api_url
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 本地開發
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. 安裝依賴：
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. 啟動開發服務器：
+```bash
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. 應用將在 `http://localhost:3000` 運行
 
-## Learn More
+## 構建部署
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 部署到 Vercel
 
-### Code Splitting
+### 自動部署
+1. 連接 GitHub repository
+2. 設置環境變數 `REACT_APP_API_URL`
+3. 自動部署
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 手動部署
+```bash
+npm install -g vercel
+vercel
+```
 
-### Analyzing the Bundle Size
+## 主要組件說明
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### ShopContext
+- 管理全局狀態（商品、購物車、用戶認證）
+- 提供 API 調用方法
+- 處理用戶登入狀態
 
-### Making a Progressive Web App
+### ProductDisplay
+- 展示商品詳細信息
+- 支持多圖片展示
+- 尺寸選擇
+- 加入購物車功能
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### CartItems
+- 購物車商品列表
+- 數量調整
+- 價格計算
+- 結算功能
 
-### Advanced Configuration
+### Hero
+- 首頁主要橫幅
+- 點擊滾動到新品區域
+- 響應式設計
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## API 整合
 
-### Deployment
+前端與後端 API 的整合包括：
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- 商品數據獲取
+- 用戶認證
+- 購物車操作
+- 訂單處理
 
-### `npm run build` fails to minify
+## 特色功能
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 商品描述格式化
+- 支持多行文本顯示
+- 中文內容適當換行
+- HTML 安全處理
+
+### 分類和標籤系統
+- 動態分類顯示
+- 標籤過濾
+- 搜索功能
+
+### 平滑滾動
+- "Latest Collection" 按鈕自動滾動
+- 流暢的用戶體驗
+
+## 瀏覽器支援
+
+- Chrome (推薦)
+- Firefox
+- Safari
+- Edge
+
+## 開發注意事項
+
+- 確保後端 API 服務正常運行
+- 設置正確的 CORS 配置
+- 檢查環境變數配置
+- 測試響應式設計
+
+## 開發者
+
+現代化電商前端解決方案，提供完整的購物體驗。
