@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { createContext } from "react";
 import { useState } from "react";
 import all_product from "../Components/Assets/all_product";
-import { getProductImage } from "../utils/imageMap";
 
 export const ShopContext = createContext(null);
 const getDefaultCart = () => {
@@ -33,7 +32,7 @@ export const ShopContextProvider = (props) => {
                 
                 return {
                     ...apiProduct,
-                    image: isValidImageUrl ? apiProduct.image : getProductImage(apiProduct.id)
+                    image: apiProduct.image
                 };
             });
             
@@ -44,12 +43,8 @@ export const ShopContextProvider = (props) => {
         })
         .catch((error) => {
             console.error("API 獲取失敗，使用本地數據:", error);
-            // 使用本地數據但替換圖片
-            const localWithImages = all_product.map(product => ({
-                ...product,
-                image: getProductImage(product.id)
-            }));
-            setAllProduct(localWithImages);
+            // 如果 API 失敗，使用本地數據作為備用
+            setAllProduct(all_product);
         })
 
         if(localStorage.getItem("auth-token")){

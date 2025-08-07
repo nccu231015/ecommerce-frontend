@@ -3,7 +3,7 @@ import './NewCollections.css'
 import { Item } from '../Item/Item'
 import { useEffect, useState } from 'react'
 import all_product from '../Assets/all_product'
-import { getProductImage } from '../../utils/imageMap'
+
 
 export const NewCollections = () => {
 
@@ -22,18 +22,15 @@ export const NewCollections = () => {
           
           return {
             ...apiProduct,
-            image: isValidImageUrl ? apiProduct.image : getProductImage(apiProduct.id)
+            image: apiProduct.image
           };
         });
         setNewCollection(mergedData);
       })
       .catch((error) => {
         console.error("API 獲取失敗，使用本地數據:", error);
-        const localWithImages = all_product.slice(1).slice(-8).map(product => ({
-          ...product,
-          image: getProductImage(product.id)
-        }));
-        setNewCollection(localWithImages);
+        // 如果 API 失敗，使用本地數據作為備用
+        setNewCollection(all_product.slice(1).slice(-8));
       })
   }, []);
   return (

@@ -3,7 +3,7 @@ import './Popular.css'
 import { Item } from '../Item/Item'
 import { useState } from 'react'
 import all_product from '../Assets/all_product'
-import { getProductImage } from '../../utils/imageMap'
+
 
 export const Popular = () => {
 
@@ -22,18 +22,15 @@ export const Popular = () => {
           
           return {
             ...apiProduct,
-            image: isValidImageUrl ? apiProduct.image : getProductImage(apiProduct.id)
+            image: apiProduct.image
           };
         });
         setPopularProducts(mergedData);
       })
       .catch((error) => {
         console.error("API 獲取失敗，使用本地數據:", error);
-        const localWithImages = all_product.filter(item => item.category === "women").slice(0, 4).map(product => ({
-          ...product,
-          image: getProductImage(product.id)
-        }));
-        setPopularProducts(localWithImages);
+        // 如果 API 失敗，使用本地數據作為備用
+        setPopularProducts(all_product.filter(item => item.category === "women").slice(0, 4));
       })
   }, []);
 
