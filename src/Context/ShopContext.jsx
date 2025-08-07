@@ -26,9 +26,15 @@ export const ShopContextProvider = (props) => {
             // 合併後端數據和本地圖片
             const mergedProducts = data.map(apiProduct => {
                 const localProduct = all_product.find(local => local.id === apiProduct.id);
+                
+                // 檢查後端圖片 URL 是否有效（不是 localhost）
+                const isValidImageUrl = apiProduct.image && 
+                                      !apiProduct.image.includes('localhost') && 
+                                      !apiProduct.image.includes('placeholder');
+                
                 return {
                     ...apiProduct,
-                    image: localProduct ? localProduct.image : apiProduct.image
+                    image: isValidImageUrl ? apiProduct.image : (localProduct ? localProduct.image : apiProduct.image)
                 };
             });
             
