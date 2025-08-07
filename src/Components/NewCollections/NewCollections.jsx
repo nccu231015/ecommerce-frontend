@@ -3,6 +3,7 @@ import './NewCollections.css'
 import { Item } from '../Item/Item'
 import { useEffect, useState } from 'react'
 import all_product from '../Assets/all_product'
+import { getProductImage } from '../../utils/imageMap'
 
 export const NewCollections = () => {
 
@@ -12,28 +13,27 @@ export const NewCollections = () => {
     fetch(`${process.env.REACT_APP_API_URL || "http://localhost:4000"}/newcollection`)
       .then((response) => response.json())
       .then((data) => {
-        // 合併後端數據和本地圖片
+        // 合併後端數據和外部圖片
         const mergedData = data.map(apiProduct => {
-          const localProduct = all_product.find(local => local.id === apiProduct.id);
-          
           // 檢查後端圖片 URL 是否有效
           const isValidImageUrl = apiProduct.image && 
                                 !apiProduct.image.includes('localhost') && 
                                 !apiProduct.image.includes('placeholder');
           
-          // 使用 public 文件夾中的圖片作為後備
-          const fallbackImage = `/images/product_${apiProduct.id}.png`;
-          
           return {
             ...apiProduct,
-            image: isValidImageUrl ? apiProduct.image : (localProduct ? localProduct.image : fallbackImage)
+            image: isValidImageUrl ? apiProduct.image : getProductImage(apiProduct.id)
           };
         });
         setNewCollection(mergedData);
       })
       .catch((error) => {
         console.error("API 獲取失敗，使用本地數據:", error);
-        setNewCollection(all_product.slice(1).slice(-8));
+        const localWithImages = all_product.slice(1).slice(-8).map(product => ({
+          ...product,
+          image: getProductImage(product.id)
+        }));
+        setNewCollection(localWithImages);
       })
   }, []);
   return (
