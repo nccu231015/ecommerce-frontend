@@ -48,7 +48,7 @@ export const ShopContextProvider = (props) => {
                     "Content-Type": "application/json",
                     "auth-token": `${localStorage.getItem("auth-token")}`,
                 },
-                body: JSON.stringify({"itmeId":itemId}),
+                body: JSON.stringify({"itemId":itemId}),
             })
             .then((response) => response.json())
             .then((data)=>console.log(data));
@@ -65,7 +65,7 @@ export const ShopContextProvider = (props) => {
                     "Content-Type": "application/json",
                     "auth-token": `${localStorage.getItem("auth-token")}`,
                 },
-                body: JSON.stringify({"itmeId":itemId}),
+                body: JSON.stringify({"itemId":itemId}),
             })
             .then((response) => response.json())
             .then((data)=>console.log(data));
