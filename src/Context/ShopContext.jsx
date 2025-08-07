@@ -32,13 +32,18 @@ export const ShopContextProvider = (props) => {
                                       !apiProduct.image.includes('localhost') && 
                                       !apiProduct.image.includes('placeholder');
                 
+                // 使用 public 文件夾中的圖片作為後備
+                const fallbackImage = `/images/product_${apiProduct.id}.png`;
+                
                 return {
                     ...apiProduct,
-                    image: isValidImageUrl ? apiProduct.image : (localProduct ? localProduct.image : apiProduct.image)
+                    image: isValidImageUrl ? apiProduct.image : (localProduct ? localProduct.image : fallbackImage)
                 };
             });
             
             console.log("合併後的產品數據:", mergedProducts);
+            console.log("第一個產品的圖片:", mergedProducts[0]?.image);
+            console.log("本地產品範例:", all_product[0]);
             setAllProduct(mergedProducts);
         })
         .catch((error) => {

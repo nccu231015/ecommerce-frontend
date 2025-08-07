@@ -21,9 +21,12 @@ export const NewCollections = () => {
                                 !apiProduct.image.includes('localhost') && 
                                 !apiProduct.image.includes('placeholder');
           
+          // 使用 public 文件夾中的圖片作為後備
+          const fallbackImage = `/images/product_${apiProduct.id}.png`;
+          
           return {
             ...apiProduct,
-            image: isValidImageUrl ? apiProduct.image : (localProduct ? localProduct.image : apiProduct.image)
+            image: isValidImageUrl ? apiProduct.image : (localProduct ? localProduct.image : fallbackImage)
           };
         });
         setNewCollection(mergedData);
