@@ -78,7 +78,8 @@ const AISearch = () => {
     setShowSuggestions(false);
 
     try {
-      console.log(`🔍 執行搜索: "${query}", 類型: ${type}`);
+      console.log(`🔍 執行搜索: "${query}"`);
+      console.log(`🌐 API URL: ${process.env.REACT_APP_API_URL || "http://localhost:4000"}`);
       
       const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:4000"}/ai-search`, {
         method: 'POST',
@@ -90,8 +91,15 @@ const AISearch = () => {
         })
       });
 
+      console.log(`📡 Response status: ${response.status}`);
+      console.log(`📡 Response ok: ${response.ok}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
-      console.log('搜索結果:', data);
+      console.log('🎯 搜索結果:', data);
 
       if (data.success) {
         setSearchResults(data.results || []);
