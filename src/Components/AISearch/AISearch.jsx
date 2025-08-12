@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './AISearch.css';
 // 使用 CSS 圖標替代圖片
-import Item from '../Item/Item';
+import { Item } from '../Item/Item';
 
 const AISearch = () => {
   const [searchQuery, setSearchQuery] = useState('');
