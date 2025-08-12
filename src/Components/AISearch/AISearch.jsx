@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './AISearch.css';
-// 使用 CSS 圖標替代圖片
 import { Item } from '../Item/Item';
 
 const AISearch = () => {
@@ -10,9 +9,10 @@ const AISearch = () => {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [searchType] = useState('hybrid'); // 固定使用混合搜索
   const [hasSearched, setHasSearched] = useState(false);
   const [searchBreakdown, setSearchBreakdown] = useState(null);
+  const [showAIAnalysis, setShowAIAnalysis] = useState(false);
+  const [selectedAnalysis, setSelectedAnalysis] = useState(null);
   
   const searchInputRef = useRef(null);
   const suggestionsRef = useRef(null);
@@ -70,7 +70,7 @@ const AISearch = () => {
     }
   };
 
-  const performSearch = async (query, type = searchType) => {
+  const performSearch = async (query) => {
     if (!query.trim()) return;
 
     setIsLoading(true);
@@ -200,8 +200,6 @@ const AISearch = () => {
     }
   };
 
-  // 移除搜索類型切換功能，固定使用混合搜索
-
   const clearSearch = () => {
     setSearchQuery('');
     setSearchResults([]);
@@ -209,6 +207,18 @@ const AISearch = () => {
     setSearchBreakdown(null);
     setShowSuggestions(false);
     searchInputRef.current?.focus();
+  };
+
+  // 點擊推薦標記顯示完整分析
+  const handleRecommendationClick = (product) => {
+    setSelectedAnalysis(product);
+    setShowAIAnalysis(true);
+  };
+
+  // 關閉AI分析彈窗
+  const closeAIAnalysis = () => {
+    setShowAIAnalysis(false);
+    setSelectedAnalysis(null);
   };
 
   return (
@@ -309,26 +319,10 @@ const AISearch = () => {
                   {product.llm_recommended && (
                     <div 
                       className="recommendation-badge"
-                      onMouseEnter={(e) => {
-                        const reasonEl = e.target.querySelector('.recommendation-reason');
-                        if (reasonEl) {
-                          reasonEl.classList.add('typing');
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        const reasonEl = e.target.querySelector('.recommendation-reason');
-                        if (reasonEl) {
-                          reasonEl.classList.remove('typing');
-                        }
-                      }}
+                      onClick={() => handleRecommendationClick(product)}
                     >
                       <span className="badge-icon">⭐</span>
-                      <span className="badge-text">AI 最推薦</span>
-                      {product.recommendation_reason && (
-                        <div className="recommendation-reason">
-                          {product.recommendation_reason}
-                        </div>
-                      )}
+                      <span className="badge-text">AI 推薦</span>
                     </div>
                   )}
                   <Item
@@ -349,6 +343,28 @@ const AISearch = () => {
           )
         ) : null}
       </div>
+
+      {/* AI 分析彈窗 */}
+      {showAIAnalysis && selectedAnalysis && (
+        <div className="ai-analysis-modal" onClick={closeAIAnalysis}>
+          <div className="ai-analysis-content" onClick={(e) => e.stopPropagation()}>
+            <div className="ai-analysis-header">
+              <div className="ai-analysis-title">
+                <span>🤖</span>
+                AI 智能推薦分析
+              </div>
+              <button className="close-modal" onClick={closeAIAnalysis}>×</button>
+            </div>
+            
+            <div className="ai-analysis-text">
+              <h3>{selectedAnalysis.name}</h3>
+              <p><strong>價格：</strong>${selectedAnalysis.new_price}</p>
+              <p><strong>AI 推薦理由：</strong></p>
+              <p>{selectedAnalysis.recommendation_reason || '這個商品最符合您的搜索需求'}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
