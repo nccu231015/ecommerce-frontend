@@ -271,25 +271,27 @@
 
 .recommendation-badge {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #b45309;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
   z-index: 10;
   cursor: pointer;
   transition: all 0.2s ease;
+  border: 1px solid #ffd700;
 }
 
 .recommendation-badge:hover {
-  transform: scale(1.05);
+  transform: translateX(-50%) scale(1.05);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.6);
 }
 
@@ -305,14 +307,15 @@
 .recommendation-reason {
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.9);
   color: white;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 11px;
   white-space: nowrap;
-  max-width: 200px;
+  max-width: 250px;
   margin-top: 4px;
   opacity: 0;
   visibility: hidden;
