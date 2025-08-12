@@ -140,7 +140,52 @@ const AISearch = () => {
   const handleSuggestionClick = (suggestion) => {
     setSearchQuery(suggestion);
     setShowSuggestions(false);
-    performSearch(suggestion);
+    performExactSearch(suggestion);
+  };
+
+  const performExactSearch = async (query) => {
+    if (!query.trim()) return;
+
+    setIsLoading(true);
+    setHasSearched(true);
+    setShowSuggestions(false);
+
+    try {
+      console.log(`🎯 執行精確匹配搜索: "${query}"`);
+      
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:4000"}/exact-search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: query
+        })
+      });
+
+      console.log(`📡 Response status: ${response.status}`);
+      console.log(`📡 Response ok: ${response.ok}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('🎯 精確匹配結果:', data);
+
+      if (data.success) {
+        setSearchResults(data.results || []);
+        setSearchBreakdown(data.breakdown);
+      } else {
+        console.error('精確匹配失敗:', data.message);
+        setSearchResults([]);
+        setSearchBreakdown(null);
+      }
+    } catch (error) {
+      console.error('精確匹配請求失敗:', error);
+      setSearchResults([]);
+      setSearchBreakdown(null);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleTrendingClick = (term) => {
