@@ -1,171 +1,192 @@
-# 電商網站前端
+# 電商網站專案
 
-這是電商網站的前端應用，使用 React 構建的現代化電商購物平台。
+這是一個完整的電子商務網站解決方案，包含前端客戶界面、後端 API 服務和管理員後台三個主要部分。
+
+## 專案架構
+
+```
+Ecommerce Website/
+├── frontend/       # 客戶端網站 (React)
+├── backend/        # API 服務 (Express + MongoDB)
+└── admin/          # 管理員後台 (React + Vite)
+```
+
+## 功能概述
+
+### 🧠 AI 智能搜索 (核心特色)
+- **純語意向量搜索**: 理解自然語言查詢意圖
+- **智能查詢分析**: 使用 GPT-4o 提取關鍵詞和篩選條件
+- **智能搜索分支**: 
+  - 純類別搜索 (女裝、男裝、童裝)
+  - 語意搜索 (黑色外套、約會穿的)
+  - 智能篩選 (價格1000以下的商品)
+- **⭐ LLM 智能推薦**: GPT-4o 分析搜索結果，標記最符合需求的商品
+- **精確匹配**: 點擊搜索建議進行精確匹配
+
+### 前端功能
+- 商品瀏覽和搜尋
+- **🎯 AI 語意搜索頁面** (新增)
+- 商品類別頁面 (男裝、女裝、兒童裝)
+- 商品詳情頁面
+- 購物車功能
+- 用戶註冊和登入
+- 訂單管理
+
+### 後端功能
+- RESTful API
+- **🤖 AI 搜索 API** (新增)
+- **向量化服務** (OpenAI Embeddings)
+- 使用者認證 (JWT)
+- 產品管理 API
+- 購物車數據存儲
+- 圖片上傳服務 (Cloudinary)
+
+### 管理員後台
+- 產品新增和管理
+- **自動向量化**: 新產品上傳時自動生成向量
+- 產品圖片上傳 (Cloudinary)
+- 產品描述、類別、標籤管理
+- 產品下架功能
 
 ## 技術棧
 
-- **React** - 前端框架
-- **React Router** - 路由管理
-- **Context API** - 狀態管理
-- **CSS3** - 樣式設計
-- **Fetch API** - HTTP 請求處理
+### 🧠 AI 搜索技術
+- **OpenAI GPT-4o**: 自然語言查詢分析
+- **OpenAI Embeddings**: text-embedding-ada-002 (1536維)
+- **MongoDB Atlas Vector Search**: 語意向量搜索
+- **Cloudinary**: 雲端圖片存儲和優化
 
-## 主要功能
+### 前端
+- React 19
+- React Router 7
+- Context API (狀態管理)
+- **AISearch 組件**: 智能搜索界面
 
-### 🏪 **商品展示**
-- 商品列表展示
-- 商品詳情頁面
-- 分類瀏覽（男裝、女裝、童裝）
-- 新品推薦
-- 熱門商品展示
+### 後端
+- Express.js
+- **MongoDB Atlas**: 雲端資料庫 + 向量搜索
+- **SearchService**: AI 搜索邏輯封裝
+- JWT (認證)
+- Multer (檔案上傳)
 
-### 🛒 **購物功能**
-- 購物車管理
-- 商品數量調整
-- 購物車結算
-- 商品收藏
+### 管理員後台
+- React 19
+- Vite 6 (構建工具)
+- React Router 7
 
-### 👤 **用戶功能**
-- 用戶註冊
-- 用戶登入
-- JWT Token 認證
-- 個人資料管理
+## 快速開始
 
-### 🎨 **UI/UX 特色**
-- 響應式設計
-- 現代化界面
-- 流暢的用戶體驗
-- 商品圖片輪播
-- 平滑滾動效果
+### 環境設定
 
-## 頁面結構
+#### 1. 設定環境變數
+在 `backend/` 目錄下創建 `.env` 檔案：
 
-```
-src/
-├── Components/          # 可重用組件
-│   ├── Navbar/         # 導航欄
-│   ├── Hero/           # 首頁橫幅
-│   ├── Popular/        # 熱門商品
-│   ├── NewCollections/ # 新品推薦
-│   ├── ProductDisplay/ # 商品展示
-│   ├── CartItems/      # 購物車項目
-│   ├── Footer/         # 頁腳
-│   └── ...
-├── Pages/              # 頁面組件
-│   ├── Shop.jsx        # 首頁
-│   ├── ShopCategory.jsx # 分類頁面
-│   ├── Product.jsx     # 商品詳情
-│   ├── Cart.jsx        # 購物車
-│   └── LoginSignup.jsx # 登入註冊
-├── Context/            # 狀態管理
-│   └── ShopContext.jsx # 全局狀態
-└── Components/Assets/  # 靜態資源
-```
-
-## 環境變數
-
-創建 `.env` 文件並設置：
-
-```env
-REACT_APP_API_URL=your_backend_api_url
-```
-
-## 本地開發
-
-1. 安裝依賴：
 ```bash
+# OpenAI API (AI 搜索必需)
+OPENAI_API_KEY=sk-your-openai-key
+
+# MongoDB Atlas (向量搜索必需)
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database
+
+# Cloudinary (圖片存儲)
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
+```
+
+#### 2. MongoDB Atlas 向量索引設定
+在 MongoDB Atlas 中創建向量搜索索引：
+- 索引名稱: `vector_index`
+- 詳細設定請參考: [AI_SEARCH_README.md](AI_SEARCH_README.md)
+
+### 本地開發
+
+#### 1. 啟動後端服務
+
+```bash
+cd backend
 npm install
+node index.js
 ```
 
-2. 啟動開發服務器：
+後端服務將在 http://localhost:4000 運行
+
+#### 2. 啟動前端網站
+
 ```bash
+cd frontend
+npm install
 npm start
 ```
 
-3. 應用將在 `http://localhost:3000` 運行
+前端將在 http://localhost:3000 運行
 
-## 構建部署
+#### 3. 啟動管理員後台
 
 ```bash
-npm run build
+cd admin
+npm install
+npm run dev
 ```
 
-## 部署到 Vercel
+管理員後台將在 http://localhost:5173 運行
 
-### 自動部署
-1. 連接 GitHub repository
-2. 設置環境變數 `REACT_APP_API_URL`
-3. 自動部署
+## 🔄 資料流程
 
-### 手動部署
-```bash
-npm install -g vercel
-vercel
-```
+### AI 搜索流程
+1. **用戶** 輸入自然語言查詢 (如: "我要找童裝，價格1000以下")
+2. **GPT-4o** 分析查詢，提取關鍵詞和篩選條件
+3. **系統** 智能判斷搜索類型：
+   - 純類別查詢 → 直接返回該類別所有商品
+   - 描述性查詢 → 語意向量搜索
+4. **MongoDB Atlas** 執行向量搜索，返回相似商品
+5. **⭐ LLM 智能推薦** 分析搜索結果，標記最符合用戶需求的商品
+6. **前端** 顯示搜索結果，推薦商品帶有金色 "⭐ AI 最推薦" 徽章
 
-## 主要組件說明
+### 商品管理流程
+1. **管理員** 通過後台添加產品 (名稱、描述、圖片、價格等)
+2. **系統** 自動生成產品向量 (OpenAI Embeddings)
+3. **用戶** 瀏覽商品、使用 AI 搜索、添加到購物車
+4. 購物車數據同步到後端資料庫
 
-### ShopContext
-- 管理全局狀態（商品、購物車、用戶認證）
-- 提供 API 調用方法
-- 處理用戶登入狀態
+## 🚀 線上部署
 
-### ProductDisplay
-- 展示商品詳細信息
-- 支持多圖片展示
-- 尺寸選擇
-- 加入購物車功能
+### Vercel 部署連結
+- **前端**: https://ecommerce-frontend-theta-mauve.vercel.app
+- **後端**: https://ecommerce-backend-indol-xi.vercel.app
+- **管理後台**: https://ecommerce-admin-amber.vercel.app
 
-### CartItems
-- 購物車商品列表
-- 數量調整
-- 價格計算
-- 結算功能
+### 部署設定
+詳細部署步驟請參考各子目錄的部署說明。
 
-### Hero
-- 首頁主要橫幅
-- 點擊滾動到新品區域
-- 響應式設計
+## 📋 環境需求
 
-## API 整合
+- Node.js 18+
+- **MongoDB Atlas** (向量搜索支援)
+- **OpenAI API Key** (AI 搜索功能)
+- **Cloudinary 帳戶** (圖片存儲)
+- 網路連線 (API 通訊)
 
-前端與後端 API 的整合包括：
+## 📚 詳細文檔
 
-- 商品數據獲取
-- 用戶認證
-- 購物車操作
-- 訂單處理
+- **AI 搜索系統**: [AI_SEARCH_README.md](AI_SEARCH_README.md)
+- **部署指南**: 各子目錄 README
+- **API 文檔**: 後端 API 端點說明
 
-## 特色功能
+## 🎯 最新更新
 
-### 商品描述格式化
-- 支持多行文本顯示
-- 中文內容適當換行
-- HTML 安全處理
+### v2.1.0 - LLM 智能推薦 (2024年1月)
+- ✨ **新增 LLM 智能推薦標記**：GPT-4o 分析搜索結果，自動標記最符合用戶需求的商品
+- 🎨 **推薦徽章設計**：金色 "⭐ AI 最推薦" 標記，頂部中央顯示不遮擋內容
+- 💡 **推薦理由提示**：懸停顯示 AI 推薦原因，提升用戶體驗
+- 🔧 **視覺優化**：金邊框突出、閃爍動畫、響應式設計
 
-### 分類和標籤系統
-- 動態分類顯示
-- 標籤過濾
-- 搜索功能
+### v2.0.0 - AI 智能搜索 (2024年1月)
+- 🧠 **純語意向量搜索**：理解自然語言查詢意圖
+- 🤖 **智能搜索分支**：純類別、語意搜索、智能篩選
+- 🎯 **精確匹配**：點擊搜索建議功能
 
-### 平滑滾動
-- "Latest Collection" 按鈕自動滾動
-- 流暢的用戶體驗
+---
 
-## 瀏覽器支援
-
-- Chrome (推薦)
-- Firefox
-- Safari
-- Edge
-
-## 開發注意事項
-
-- 確保後端 API 服務正常運行
-- 設置正確的 CORS 配置
-- 檢查環境變數配置
-- 測試響應式設計
-
-## 開發者
-
-現代化電商前端解決方案，提供完整的購物體驗。
+**最新版本**: v2.1.0  
+**最後更新**: 2024年1月
