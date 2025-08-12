@@ -86,7 +86,6 @@ const AISearch = () => {
         body: JSON.stringify({
           query: query,
           limit: 20,
-          searchType: type,
           filters: {}
         })
       });
@@ -163,8 +162,8 @@ const AISearch = () => {
     <div className="ai-search">
       {/* 搜索標題 */}
       <div className="search-header">
-        <h2>🎯 智能搜索</h2>
-        <p>結合 AI 語義理解與關鍵字匹配，為您找到最相關的商品</p>
+        <h2>🧠 AI 語意搜索</h2>
+        <p>使用先進的 AI 語義理解技術，智能找到最符合您需求的商品</p>
       </div>
 
       {/* 搜索框 */}
