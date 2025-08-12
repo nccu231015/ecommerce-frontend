@@ -10,7 +10,7 @@ const AISearch = () => {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [searchType, setSearchType] = useState('hybrid');
+  const [searchType] = useState('hybrid'); // 固定使用混合搜索
   const [hasSearched, setHasSearched] = useState(false);
   const [searchBreakdown, setSearchBreakdown] = useState(null);
   
@@ -148,12 +148,7 @@ const AISearch = () => {
     }
   };
 
-  const handleSearchTypeChange = (type) => {
-    setSearchType(type);
-    if (hasSearched && searchQuery.trim()) {
-      performSearch(searchQuery, type);
-    }
-  };
+  // 移除搜索類型切換功能，固定使用混合搜索
 
   const clearSearch = () => {
     setSearchQuery('');
@@ -168,8 +163,8 @@ const AISearch = () => {
     <div className="ai-search">
       {/* 搜索標題 */}
       <div className="search-header">
-        <h2>🤖 AI 智能搜索</h2>
-        <p>輸入任何內容，AI 會幫您找到最相關的商品</p>
+        <h2>🎯 智能搜索</h2>
+        <p>結合 AI 語義理解與關鍵字匹配，為您找到最相關的商品</p>
       </div>
 
       {/* 搜索框 */}
@@ -217,27 +212,7 @@ const AISearch = () => {
         )}
       </div>
 
-      {/* 搜索類型切換 */}
-      <div className="search-type-tabs">
-        <button
-          className={`tab ${searchType === 'hybrid' ? 'active' : ''}`}
-          onClick={() => handleSearchTypeChange('hybrid')}
-        >
-          🎯 智能搜索
-        </button>
-        <button
-          className={`tab ${searchType === 'vector' ? 'active' : ''}`}
-          onClick={() => handleSearchTypeChange('vector')}
-        >
-          🧠 語義搜索
-        </button>
-        <button
-          className={`tab ${searchType === 'keyword' ? 'active' : ''}`}
-          onClick={() => handleSearchTypeChange('keyword')}
-        >
-          🔍 關鍵字搜索
-        </button>
-      </div>
+      {/* 移除搜索類型切換按鈕 - 固定使用混合搜索 */}
 
       {/* 熱門搜索 */}
       {!hasSearched && trending.length > 0 && (
@@ -274,8 +249,7 @@ const AISearch = () => {
             )}
           </div>
           <div className="weights-info">
-            權重 - 語義: {Math.round(searchBreakdown.weights?.vector * 100)}% | 
-            關鍵字: {Math.round(searchBreakdown.weights?.keyword * 100)}%
+            🧠 語義: {Math.round(searchBreakdown.weights?.vector * 100)}% + 🔍 關鍵字: {Math.round(searchBreakdown.weights?.keyword * 100)}%
           </div>
         </div>
       )}

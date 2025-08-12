@@ -169,37 +169,7 @@
   opacity: 0.5;
 }
 
-/* 搜索類型切換 */
-.search-type-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-
-.tab {
-  background: white;
-  border: 2px solid #ddd;
-  border-radius: 25px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.tab:hover {
-  border-color: #ff4141;
-  color: #ff4141;
-}
-
-.tab.active {
-  background: linear-gradient(135deg, #ff4141, #ff6b6b);
-  border-color: #ff4141;
-  color: white;
-}
+/* 移除搜索類型切換按鈕樣式 - 固定使用混合搜索 */
 
 /* 熱門搜索 */
 .trending-searches {
