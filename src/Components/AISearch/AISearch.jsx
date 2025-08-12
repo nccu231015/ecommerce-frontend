@@ -225,7 +225,7 @@ const AISearch = () => {
     <div className="ai-search">
       {/* 搜索標題 */}
       <div className="search-header">
-        <h2>🧠 AI 語意搜索</h2>
+        <h2>🧠 AI Search</h2>
         <p>使用先進的 AI 語義理解技術，智能找到最符合您需求的商品</p>
       </div>
 
@@ -351,7 +351,7 @@ const AISearch = () => {
             <div className="ai-analysis-header">
               <div className="ai-analysis-title">
                 <span>🤖</span>
-                AI 智能推薦分析
+                AI Recommendation Analysis
               </div>
               <button className="close-modal" onClick={closeAIAnalysis}>×</button>
             </div>
