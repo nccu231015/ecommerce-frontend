@@ -233,23 +233,10 @@ const AISearch = () => {
       )}
 
       {/* 搜索結果統計 */}
-      {hasSearched && searchBreakdown && (
+      {hasSearched && (
         <div className="search-stats">
           <div className="stats-info">
             <span>找到 {searchResults.length} 個結果</span>
-            {searchBreakdown.vector_results > 0 && (
-              <span className="stat-detail">
-                語義: {searchBreakdown.vector_results}
-              </span>
-            )}
-            {searchBreakdown.keyword_results > 0 && (
-              <span className="stat-detail">
-                關鍵字: {searchBreakdown.keyword_results}
-              </span>
-            )}
-          </div>
-          <div className="weights-info">
-            🧠 語義: {Math.round(searchBreakdown.weights?.vector * 100)}% + 🔍 關鍵字: {Math.round(searchBreakdown.weights?.keyword * 100)}%
           </div>
         </div>
       )}
@@ -273,16 +260,7 @@ const AISearch = () => {
                     new_price={product.new_price}
                     old_price={product.old_price}
                   />
-                  <div className="result-metadata">
-                    <span className={`search-type ${product.search_type}`}>
-                      {product.search_type === 'vector' ? '🧠' : '🔍'}
-                    </span>
-                    {product.similarity_score && (
-                      <span className="similarity-score">
-                        {Math.round(product.similarity_score * 100)}%
-                      </span>
-                    )}
-                  </div>
+
                 </div>
               ))}
             </div>
