@@ -251,6 +251,84 @@
 
 .result-item {
   position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* LLM 推薦標記 */
+.result-item.llm-recommended {
+  border: 2px solid #ffd700;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.recommendation-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #b45309;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.recommendation-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.6);
+}
+
+.badge-icon {
+  font-size: 14px;
+  animation: sparkle 2s infinite;
+}
+
+.badge-text {
+  white-space: nowrap;
+}
+
+.recommendation-reason {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  white-space: nowrap;
+  max-width: 200px;
+  margin-top: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 20;
+}
+
+.recommendation-badge:hover .recommendation-reason {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 推薦標記動畫 */
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
 }
 
 .result-metadata {

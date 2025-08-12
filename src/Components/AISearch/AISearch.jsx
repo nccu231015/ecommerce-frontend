@@ -304,7 +304,19 @@ const AISearch = () => {
           searchResults.length > 0 ? (
             <div className="results-grid">
               {searchResults.map((product, index) => (
-                <div key={product.id} className="result-item">
+                <div key={product.id} className={`result-item ${product.llm_recommended ? 'llm-recommended' : ''}`}>
+                  {/* LLM 推薦標記 */}
+                  {product.llm_recommended && (
+                    <div className="recommendation-badge">
+                      <span className="badge-icon">⭐</span>
+                      <span className="badge-text">AI 最推薦</span>
+                      {product.recommendation_reason && (
+                        <div className="recommendation-reason">
+                          {product.recommendation_reason}
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <Item
                     id={product.id}
                     name={product.name}
@@ -312,7 +324,6 @@ const AISearch = () => {
                     new_price={product.new_price}
                     old_price={product.old_price}
                   />
-
                 </div>
               ))}
             </div>
