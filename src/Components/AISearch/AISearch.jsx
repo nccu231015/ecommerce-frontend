@@ -315,7 +315,14 @@ const AISearch = () => {
             <div className="results-grid">
               {searchResults.map((product, index) => (
                 <div key={product.id} className="result-item">
-                  {/* LLM 推薦標記 */}
+                  <Item
+                    id={product.id}
+                    name={product.name}
+                    image={product.image}
+                    new_price={product.new_price}
+                    old_price={product.old_price}
+                  />
+                  {/* LLM 推薦標記 - 放在 Item 組件外層右上角 */}
                   {product.llm_recommended && (
                     <div 
                       className="recommendation-badge"
@@ -325,13 +332,6 @@ const AISearch = () => {
                       <span className="badge-text">AI 推薦</span>
                     </div>
                   )}
-                  <Item
-                    id={product.id}
-                    name={product.name}
-                    image={product.image}
-                    new_price={product.new_price}
-                    old_price={product.old_price}
-                  />
                 </div>
               ))}
             </div>

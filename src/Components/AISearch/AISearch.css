@@ -251,37 +251,28 @@
 
 .result-item {
   position: relative;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.result-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* LLM 推薦標記 */
+/* LLM 推薦標記 - 放在商品卡片右上角外側，不影響內容排版 */
 .recommendation-badge {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
+  top: -10px;
+  right: -10px;
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #b45309;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 12px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 3px;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
-  z-index: 10;
+  gap: 4px;
+  box-shadow: 0 3px 10px rgba(255, 215, 0, 0.5);
+  z-index: 15;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 1px solid #ffd700;
+  border: 2px solid #fff;
+  white-space: nowrap;
 }
 
 .recommendation-badge:hover {
