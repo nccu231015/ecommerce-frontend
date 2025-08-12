@@ -264,16 +264,10 @@
 }
 
 /* LLM 推薦標記 */
-.result-item.llm-recommended {
-  border: 2px solid #ffd700;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-}
-
 .recommendation-badge {
   position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 8px;
+  right: 8px;
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #b45309;
   padding: 4px 8px;
@@ -291,7 +285,7 @@
 }
 
 .recommendation-badge:hover {
-  transform: translateX(-50%) scale(1.05);
+  transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.6);
 }
 
@@ -307,25 +301,39 @@
 .recommendation-reason {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 0;
   background: rgba(0, 0, 0, 0.9);
   color: white;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 11px;
   white-space: nowrap;
-  max-width: 250px;
+  max-width: 200px;
   margin-top: 4px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s ease;
+  transition: opacity 0.3s ease;
   z-index: 20;
+  overflow: hidden;
 }
 
 .recommendation-badge:hover .recommendation-reason {
   opacity: 1;
   visibility: visible;
+}
+
+/* 打字機效果 */
+.recommendation-reason.typing {
+  animation: typewriter 2s steps(40, end) forwards;
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 /* 推薦標記動畫 */

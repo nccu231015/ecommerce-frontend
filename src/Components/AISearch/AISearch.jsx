@@ -304,10 +304,24 @@ const AISearch = () => {
           searchResults.length > 0 ? (
             <div className="results-grid">
               {searchResults.map((product, index) => (
-                <div key={product.id} className={`result-item ${product.llm_recommended ? 'llm-recommended' : ''}`}>
+                <div key={product.id} className="result-item">
                   {/* LLM 推薦標記 */}
                   {product.llm_recommended && (
-                    <div className="recommendation-badge">
+                    <div 
+                      className="recommendation-badge"
+                      onMouseEnter={(e) => {
+                        const reasonEl = e.target.querySelector('.recommendation-reason');
+                        if (reasonEl) {
+                          reasonEl.classList.add('typing');
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        const reasonEl = e.target.querySelector('.recommendation-reason');
+                        if (reasonEl) {
+                          reasonEl.classList.remove('typing');
+                        }
+                      }}
+                    >
                       <span className="badge-icon">⭐</span>
                       <span className="badge-text">AI 最推薦</span>
                       {product.recommendation_reason && (
