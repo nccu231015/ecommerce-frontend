@@ -13,6 +13,7 @@ const AISearch = () => {
   const [searchBreakdown, setSearchBreakdown] = useState(null);
   const [showAIAnalysis, setShowAIAnalysis] = useState(false);
   const [selectedAnalysis, setSelectedAnalysis] = useState(null);
+  const [searchType, setSearchType] = useState('hybrid'); // 新增：搜索類型
   
   const searchInputRef = useRef(null);
   const suggestionsRef = useRef(null);
@@ -225,8 +226,8 @@ const AISearch = () => {
     <div className="ai-search">
       {/* 搜索標題 */}
       <div className="search-header">
-        <h2>🧠 AI Search</h2>
-        <p>使用先進的 AI 語義理解技術，智能找到最符合您需求的商品</p>
+        <h2>🔄 AI 混合搜索</h2>
+        <p>結合向量語義搜索和全文搜索，配合 AI 智能推薦，為您找到最符合需求的商品</p>
       </div>
 
       {/* 搜索框 */}
