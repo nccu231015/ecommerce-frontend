@@ -3,6 +3,14 @@
     margin: 0px 110px;
 }
 
+.product-title-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
 .productdisplay-left{
     display: flex;
     gap: 17px;

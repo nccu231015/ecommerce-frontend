@@ -10,13 +10,6 @@ export const Item = (props) => {
   
   return (
     <div className="item">
-        {props.recommendation_type && (
-          <div className="recommendation-badge">
-            {props.recommendation_type === "vector_similarity" ? "AI 智能推薦" : 
-             props.recommendation_type === "category_tag_match" ? "類別推薦" : 
-             props.recommendation_type === "random" ? "為您精選" : "推薦商品"}
-          </div>
-        )}
         <Link to={`/product/${props.id}`} onClick={handleClick}>
           <img src={props.image} alt={props.name} />
         </Link>

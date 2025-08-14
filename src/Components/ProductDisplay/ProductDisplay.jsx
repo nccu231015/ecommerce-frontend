@@ -4,6 +4,7 @@ import star_icon from '../Assets/star_icon.png'
 import star_dull_icon from '../Assets/star_dull_icon.png'
 import { useContext } from 'react';
 import { ShopContext } from '../../Context/ShopContext';
+import { HoverRecommendation } from '../HoverRecommendation/HoverRecommendation';
 
 export const ProductDisplay = (props) => {
     const {product} = props;
@@ -22,7 +23,10 @@ export const ProductDisplay = (props) => {
             </div>
         </div>
         <div className="productdisplay-right">
-            <h1>{product.name}</h1>
+            <div className="product-title-container">
+                <h1>{product.name}</h1>
+                <HoverRecommendation productId={product.id} />
+            </div>
             <div className="productdisplay-right-stars">
                 <img src={star_icon} alt="" />
                 <img src={star_icon} alt="" />
