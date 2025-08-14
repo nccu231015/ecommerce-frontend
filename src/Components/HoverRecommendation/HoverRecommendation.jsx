@@ -41,12 +41,12 @@ export const HoverRecommendation = ({ productId }) => {
   };
 
   return (
-    <div className="hover-recommendation">
-      <div 
-        className="recommendation-trigger"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+    <div 
+      className="hover-recommendation"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="recommendation-trigger">
         <span className="recommendation-text">猜你也喜歡</span>
         <span className="recommendation-icon">💡</span>
       </div>

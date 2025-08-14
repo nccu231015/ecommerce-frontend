@@ -43,7 +43,7 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 10px;
+  margin-top: 5px;
   background: white;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.15);
@@ -51,6 +51,17 @@
   z-index: 1000;
   animation: fadeInUp 0.3s ease;
   border: 1px solid #e0e0e0;
+}
+
+/* 在按鈕和彈窗之間添加一個不可見的橋接區域 */
+.recommendation-popup::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: transparent;
 }
 
 @keyframes fadeInUp {
