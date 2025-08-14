@@ -13,6 +13,12 @@ export const HoverRecommendation = ({ productId }) => {
     }
   }, [isHovered, productId]);
 
+  // 當 productId 改變時，清空舊的推薦數據
+  useEffect(() => {
+    setRecommendations([]);
+    setLoading(false);
+  }, [productId]);
+
   const fetchRecommendations = async () => {
     if (!productId) return;
     
