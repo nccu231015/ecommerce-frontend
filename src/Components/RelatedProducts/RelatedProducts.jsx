@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './RelatedProducts.css';
 import { Item } from '../Item/Item';
-import { useParams } from 'react-router-dom';
 
-export const RelatedProducts = () => {
+export const RelatedProducts = ({ productId }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { productId } = useParams();
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {

@@ -1,5 +1,6 @@
 .item{
     width: 350px;
+    position: relative;
 }
 .item img{
     width: 350px;
