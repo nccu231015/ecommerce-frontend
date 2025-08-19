@@ -508,28 +508,40 @@
 }
 
 .action-button {
+  /* 重置所有可能的樣式差異 */
+  margin: 0;
   padding: 10px 20px;
+  border: 1px solid transparent;
   border-radius: 6px;
+  background: none;
+  color: inherit;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  font-family: inherit;
   line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
   vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  /* 強制重置瀏覽器默認樣式 */
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 /* 確保 Link 元素與 button 元素完全一致 */
 .action-button:link,
 .action-button:visited,
-.action-button:active {
+.action-button:active,
+.action-button:focus {
   text-decoration: none;
   color: inherit;
+  outline: none;
 }
 
 .action-button.back {
