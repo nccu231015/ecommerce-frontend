@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './HoverRecommendation.css';
 import { Link } from 'react-router-dom';
+import { ShopContext } from '../../Context/ShopContext';
 
 export const HoverRecommendation = ({ productId }) => {
+  const { addToCart } = useContext(ShopContext);
   const [isHovered, setIsHovered] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -11,6 +13,7 @@ export const HoverRecommendation = ({ productId }) => {
   const [originalProduct, setOriginalProduct] = useState(null);
   const [materialComparison, setMaterialComparison] = useState(null);
   const [loadingMaterialComparison, setLoadingMaterialComparison] = useState(false);
+  const [addingToCart, setAddingToCart] = useState(false);
 
   useEffect(() => {
     if (isHovered && productId && recommendations.length === 0) {
@@ -78,6 +81,36 @@ export const HoverRecommendation = ({ productId }) => {
     window.scrollTo(0, 0);
   };
 
+  const handleAddBothToCart = async () => {
+    if (!originalProduct || !selectedForComparison || !addToCart) {
+      console.error('無法添加商品到購物車：缺少必要數據');
+      return;
+    }
+
+    try {
+      setAddingToCart(true);
+      
+      // 添加原商品到購物車
+      addToCart(originalProduct.id);
+      // 添加推薦商品到購物車  
+      addToCart(selectedForComparison.id);
+      
+      // 短暫延遲以顯示載入狀態
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // 關閉比較模態視窗
+      closeComparisonModal();
+      
+      // 可以添加成功提示的 toast 或其他 UI 反饋
+      console.log('成功添加兩件商品到購物車');
+      
+    } catch (error) {
+      console.error('添加商品到購物車失敗:', error);
+    } finally {
+      setAddingToCart(false);
+    }
+  };
+
   const handleCompareClick = (item, e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -125,6 +158,7 @@ export const HoverRecommendation = ({ productId }) => {
     setSelectedForComparison(null);
     setMaterialComparison(null);
     setLoadingMaterialComparison(false);
+    setAddingToCart(false);
   };
 
   // 計算比較指標
@@ -338,7 +372,13 @@ export const HoverRecommendation = ({ productId }) => {
             
             <div className="comparison-actions">
               <button className="action-button back" onClick={closeComparisonModal}>返回</button>
-              <button className="action-button add-both">兩件都加入購物車</button>
+              <button 
+                className="action-button add-both" 
+                onClick={handleAddBothToCart}
+                disabled={addingToCart}
+              >
+                {addingToCart ? '添加中...' : '兩件都加入購物車'}
+              </button>
               <Link to={`/product/${selectedForComparison.id}`} className="action-button view-recommended" onClick={handleClick}>
                 查看推薦商品
               </Link>
