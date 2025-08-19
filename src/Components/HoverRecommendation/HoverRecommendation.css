@@ -460,11 +460,12 @@
 
 .analysis-text {
   display: block;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.8;
   color: #2c3e50;
   margin-bottom: 10px;
-  text-align: justify;
+  white-space: pre-line;
+  text-align: left;
 }
 
 .analysis-meta {
@@ -500,23 +501,32 @@
 }
 
 .comparison-actions {
-  padding: 15px;
+  padding: 12px;
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
+  flex-direction: column;
+  gap: 6px;
   border-top: 1px solid #eee;
 }
 
+@media (min-width: 600px) {
+  .comparison-actions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
 .action-button {
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 10px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
   display: inline-block;
   text-align: center;
+  min-height: 24px;
+  line-height: 1.2;
 }
 
 .action-button.back {
