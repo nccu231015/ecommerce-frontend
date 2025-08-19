@@ -284,13 +284,6 @@ export const HoverRecommendation = ({ productId }) => {
             </div>
             
             <div className="comparison-details">
-              <div className="comparison-tabs">
-                <button className="tab active">基本信息</button>
-                <button className="tab">材質與做工</button>
-                <button className="tab">尺寸與合身度</button>
-                <button className="tab">用戶評價</button>
-              </div>
-              
               <div className="comparison-tab-content">
                 <div className="comparison-metric">
                   <h5>價格比較</h5>

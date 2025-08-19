@@ -507,9 +507,9 @@
 }
 
 .action-button {
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
