@@ -511,39 +511,45 @@
 @media (min-width: 600px) {
   .comparison-actions {
     flex-direction: row;
-    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .action-button {
+    flex: 1;
+    max-width: 150px;
   }
 }
 
 .action-button {
-  padding: 4px 8px;
-  border-radius: 3px;
-  font-size: 10px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 11px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
   display: inline-block;
   text-align: center;
-  min-height: 24px;
-  line-height: 1.2;
+  min-height: 32px;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  flex: 1;
+  white-space: nowrap;
 }
 
 .action-button.back {
   background-color: #f8f9fa;
-  border: 1px solid #ddd;
+  border-color: #ddd;
   color: #666;
 }
 
 .action-button.add-both {
   background-color: #4ecdc4;
-  border: none;
   color: white;
 }
 
 .action-button.view-recommended {
   background-color: #764ba2;
-  border: none;
   color: white;
 }
 
