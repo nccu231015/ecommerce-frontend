@@ -519,6 +519,17 @@
   text-align: center;
   border: 1px solid transparent;
   box-sizing: border-box;
+  font-family: inherit;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+/* 確保 Link 元素與 button 元素完全一致 */
+.action-button:link,
+.action-button:visited,
+.action-button:active {
+  text-decoration: none;
+  color: inherit;
 }
 
 .action-button.back {
